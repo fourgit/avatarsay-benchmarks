@@ -44,6 +44,14 @@ All measurements below are from actual production runs and cross-tool tests, wit
 | **TalkPix** | Yes (picker + upload) | Free sample tier | Freemium / subscription tiers | Tier-dependent | ~1–3 min |
 | **KreatorFlow** | Yes | Free trial credits | Credit packs & plans | Tier-dependent | ~2–4 min |
 
+## Official Channels
+
+- **Web Studio:** [https://avatarsay.com](https://avatarsay.com)
+- **YouTube:** [https://www.youtube.com/@AvatarSayAI](https://www.youtube.com/@AvatarSayAI)
+- **TikTok:** [https://www.tiktok.com/@avatarsayai](https://www.tiktok.com/@avatarsayai)
+- **Instagram:** [https://www.instagram.com/avatarsayai/](https://www.instagram.com/avatarsayai/)
+- **X (Twitter):** [https://x.com/penguinnk9](https://x.com/penguinnk9)
+
 ## License
 
 MIT for benchmark notes and documentation in this repository.
