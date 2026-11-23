@@ -2,6 +2,7 @@
 
 **Website:** [https://avatarsay.com](https://avatarsay.com)  
 **Free Tools & Open Benchmarks:**
+- [Fresh 12-Run Stratified Benchmark (`2026-11-23`)](https://avatarsay.com/talking-cartoon-test#stratified-benchmark) — `12/12` technical success (`0` failed/auto-refunded), Fast Preview (`22 s` p50 / `51 s` p95) vs Studio HD (`171 s` p50 / `211 s` p95) across `9:16`, `1:1`, and `16:9` and 4 languages (`EN`, `ES`, `JA`, `ZH`), bringing total measured public clips to `33`.
 - [Open 21-Clip Render Log & Failure Modes](https://avatarsay.com/talking-cartoon-test#render-log) — historical `2026-11-19` square (`960×960`) Studio HD (`Kling AI Avatar v2 Standard`) benchmark run: all 21 unedited clips, `ffprobe` durations, and 3 documented caveats.
 - [Realistic Retry & Credit Budget Math](https://avatarsay.com/pricing#realistic-cost) — end-to-end credit and USD totals including avatar re-rolls and video re-takes.
 - [Fantasy & Tabletop RPG NPC Generator](https://avatarsay.com/fantasy-npc-generator#indie-game-npc) — deterministic seedable NPC roller + 0-credit imported sprite workflow for indie games & VTTs.
@@ -29,6 +30,32 @@
    - **Paid video rate**: **`12 credits/s`** (`5–30 s` paid clips, up to `400` characters), billed on measured speech rounded up (`5 s` paid minimum), not Kling's padded MP4 container length.
    - **Free offer**: Eligible new accounts receive **30 signup credits** for portraits plus **1 free Fast Preview talking clip** up to **`5 s` (`+1 s` grace) / `75` characters** while the launch offer lasts.
    - **Refunds**: **14-day refund** on unused credit packs; **automatic credit refund** on technical render failures.
+
+---
+
+## Fresh Stratified Benchmark (`2026-11-23` — 12 Runs Across Both Engines, 3 Ratios & 4 Languages)
+
+Full interactive table and downloadable MP4s: [avatarsay.com/talking-cartoon-test#stratified-benchmark](https://avatarsay.com/talking-cartoon-test#stratified-benchmark).
+
+- **Attempt denominator & reliability:** **`12 / 12`** technical completions (**`100%`**, **`0`** failed / auto-refunded). Combined with the `21` historical square Studio HD clips below, **`33` measured clips** are published with raw `ffprobe` specs and unedited notes.
+- **Fast Preview (`veed/fabric-1.0/fast`, `25 fps`, 6 runs):** **`22 s` p50** / **`51 s` p95** (range `18–51 s`).
+- **Studio HD (`fal-ai/kling-video/ai-avatar/v2/standard`, `30 fps`, 6 runs):** **`171 s` p50** (`2m 51s`) / **`211 s` p95** (`3m 31s`, range `152–211 s`).
+- **Coverage & audit:** `4` languages (`EN`, `ES`, `JA`, `ZH`), `3` aspect ratios (`9:16`, `1:1`, `16:9`), `10` text-prompt portraits + `2` 0-credit imported stylized illustrations, **`0` watermarks**, **`8` clean passes + `4` documented caveats**, total provider spend **`~$3.71`**.
+
+| Run ID | Engine | Aspect & Lang | Input & Voice | Speech / MP4 | Raw `ffprobe` | Wall-Clock | Honest Observation |
+|---|---|---|---|---|---|---|---|
+| `fp-9x16-en` | Fast Preview | `9:16` · EN | Text (`3D Cartoon`, `Friendly`) | `3.02 s` / `2.96 s` | `480x864`, `25 fps` | `21 s` | Clean snout lip-sync and expressive gestures |
+| `fp-9x16-es` | Fast Preview | `9:16` · ES | **Imported art** (`Anime`, `Lively Girl`) | `3.49 s` / `3.44 s` | `480x864`, `25 fps` | `22 s` | **Caveat:** crisp Spanish sync, but a hand rises into left edge |
+| `fp-1x1-ja` | Fast Preview | `1:1` · JA | Text (`Anime`, `Calm Woman`) | `3.28 s` / `3.20 s` | `640x640`, `25 fps` | `18 s` | Clean Japanese mouth shapes (`480p` preset outputs `640x640` on `1:1`) |
+| `fp-1x1-zh` | Fast Preview | `1:1` · ZH | Text (`3D Cartoon`, `Casual Guy`) | `3.56 s` / `3.48 s` | `640x640`, `25 fps` | `18 s` | Clear Mandarin jaw motion on dragon snout; steady lantern |
+| `fp-16x9-en` | Fast Preview | `16:9` · EN | Text (`Pixel Art`, `Deep Voice`) | `3.28 s` / `3.20 s` | `864x480`, `25 fps` | `42 s` | Readable pixel-art mouth shapes inside beard |
+| `fp-16x9-edge` | Fast Preview | `16:9` · EN | Text (`3D Cartoon`, `Patient Man`, 62 ch) | `5.33 s` / `5.28 s` | `864x480`, `25 fps` | `51 s` | **Caveat:** `5.33 s` fits `5 s + 1 s` free grace; closed owl beak opens minimally |
+| `hd-9x16-en` | Studio HD | `9:16` · EN | Text (`3D Cartoon`, `Friendly`) | `3.67 s` / `3.73 s` | `720x1280`, `30 fps` | `152 s` | Natural blinks, clean snout sync, steady mic grip |
+| `hd-9x16-es` | Studio HD | `9:16` · ES | Text (`Anime`, `Casual Guy`) | `3.82 s` / `4.00 s` | `720x1280`, `30 fps` | `170 s` | Crisp Spanish cel-shaded mouth articulation |
+| `hd-1x1-ja` | Studio HD | `1:1` · JA | **Imported art** (`Watercolor`, `Warm Woman`) | `4.43 s` / `4.53 s` | `960x960`, `30 fps` | `163 s` | Gentle Japanese sync; watercolor paper wash stays intact |
+| `hd-1x1-zh` | Studio HD | `1:1` · ZH | Text (`Cyberpunk`, `Lively Girl`) | `5.22 s` / `7.20 s` | `960x960`, `30 fps` | `211 s` | **Caveat:** clean Mandarin sync; Kling pads `5.22 s` to `7.20 s` MP4 (billed `6 s`) |
+| `hd-16x9-en` | Studio HD | `16:9` · EN | Text (`Fantasy`, `Young Hero`) | `3.24 s` / `3.20 s` | `1280x720`, `30 fps` | `171 s` | Clean painterly hood folds, blinks, and rim light |
+| `hd-16x9-edge` | Studio HD | `16:9` · EN | Text (`Anime` glasses + 3/4, `Deep Voice`) | `3.71 s` / `3.73 s` | `1280x720`, `30 fps` | `203 s` | **Caveat:** glasses rim stays rigid with clean sync; FLUX normalized 3/4 turn near-frontal |
 
 ---
 
